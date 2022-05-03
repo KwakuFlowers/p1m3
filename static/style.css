@@ -1,0 +1,49 @@
+html {
+    background-color: burlywood;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+}
+
+body {
+    background-color: green;
+    align-items: center;
+    width: 65%;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+}
+
+body h1 {
+    font-size: 50px;
+    font-style: italic;
+}
+
+body a {
+    font-size: 70px;
+}
+
+.review_section form {
+    margin: 10px;
+    background-color: burlywood;
+    background-size: contain;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.review_section input {
+    margin: 20px;
+}
+
+.re {
+    margin: 10px;
+    background-color: burlywood;
+
+}
+
+.re p {
+    font-weight: bold;
+}
