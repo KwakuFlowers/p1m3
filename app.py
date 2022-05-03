@@ -1,5 +1,15 @@
+from operator import truth
 import flask
-from flask import Flask, render_template, redirect, session, url_for, request, flash
+from flask import (
+    Flask,
+    jsonify,
+    render_template,
+    redirect,
+    session,
+    url_for,
+    request,
+    flash,
+)
 import random
 
 from sqlalchemy import create_engine
@@ -186,6 +196,49 @@ def rand():
 def logout():
     logout_user()
     return redirect("login")
+
+
+# set up a separate route to serve the index.html file generated
+# by create-react-app/npm run build.
+# By doing this, we make it so you can paste in all your old app routes
+# from Milestone 2 without interfering with the functionality here.
+bp = flask.Blueprint(
+    "bp",
+    __name__,
+    template_folder="./static/react",
+)
+
+# route for serving React page
+@bp.route("/re_pager")
+@login_required
+def index():
+    # NB: DO NOT add an "index.html" file in your normal templates folder
+    # Flask will stop serving this React page correctly
+    return flask.render_template("index.html")
+
+
+app.register_blueprint(bp)
+
+
+@app.route("/userreviews")
+@login_required
+def fetch_reviews():
+    truths = Song_review.query.filter_by(Username=current_user.Username).all()
+    reviewed = [
+        [
+            reviewed.append(
+                {
+                    "rating": rev.rating,
+                    "artist": rev.artist,
+                    "review": rev.review,
+                    "Song": rev.song,
+                }
+            )
+            for rev in truths
+        ]
+    ]
+
+    return jsonify(truths)
 
 
 if __name__ == "__main__":
