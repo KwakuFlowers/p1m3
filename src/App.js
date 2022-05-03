@@ -10,9 +10,17 @@ function App() {
   }, []);
   return (
     <div className="App">
-      {comment}
+      {comment.map(rev => (
+        <div>
+          {rev.rating}
+          {rev.Song}
+          {rev.artist}
+          {rev.artist}
+        </div>
+      ))}
     </div>
   );
+  //{comment}
 }
 
 export default App;
